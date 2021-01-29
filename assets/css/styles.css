@@ -1,0 +1,30 @@
+html,
+body{
+    margin: 0px;
+    background-color: #0df2c9;
+    color: white;
+}
+
+.header{
+    text-align: center;
+    background-color: black;
+    padding: 20px;
+}
+
+.header__title{
+    font-family: Impact, Haettenschweiler, sans-serif;
+    font-size: 25px;
+}
+
+/* CARTAS */
+.cartas__img{
+    position: relative;
+    width: 150px;
+    left: 90px;
+    margin-left: -75px;
+}
+
+#cartas__computadora,
+#cartas_jugador{
+    height: 240px;
+}
