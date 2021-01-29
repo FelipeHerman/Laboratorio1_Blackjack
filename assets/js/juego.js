@@ -9,6 +9,7 @@ let deck         = [];
 const tipos      = ['C', 'D', 'H', 'S'];
 const otrosTipos = ['A', 'J', 'Q', 'K'];
 
+// Está funcion crea una nueva baraja
 const crearDeck = () => { //Funcion de flecha
     for (let i = 2; i <= 10; i++) {
         for (const tipo of tipos) {
@@ -22,7 +23,6 @@ const crearDeck = () => { //Funcion de flecha
         }
     }
 
-    console.log(deck);
     deck = _.shuffle(deck);
     console.log(deck);
 
@@ -30,3 +30,19 @@ const crearDeck = () => { //Funcion de flecha
 }
 
 crearDeck();
+
+//Esta funcion permite pedir una carta
+const pedirCarta = () => {
+    if (deck.length === 0) {
+        throw 'No hay cartas en la baraja';
+    }
+
+    const carta = deck.pop();
+
+    console.log(deck);
+    console.log(carta);
+
+    return carta;
+} 
+
+//pedirCarta();
