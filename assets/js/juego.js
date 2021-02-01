@@ -13,8 +13,9 @@ let puntosJugador = 0,
     puntosComputadora = 0;
 
 //Referencias HTML
-const btnPedir   = document.querySelector('#idPedir');
-const puntosHTML = document.querySelectorAll('small');
+const btnPedir         = document.querySelector('#idPedir');
+const divCartasJugador = document.querySelector('#cartas__jugador');
+const puntosHTML       = document.querySelectorAll('small');
 
 // Está funcion crea una nueva baraja
 const crearDeck = () => { //Funcion de flecha
@@ -76,5 +77,19 @@ btnPedir.addEventListener('click', () => {
     puntosJugador = puntosJugador + valorCarta(carta);
 
     puntosHTML[0].innerText = puntosJugador;
+
+    //<img class="cartas__img" src="assets/cartas/10S.png">
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${carta}.png`;
+    imgCarta.classList.add('cartas__img');
+    divCartasJugador.append(imgCarta);
+
+    if (puntosJugador > 21) {
+        console.warn('Perdiste');
+        btnPedir.disabled = true;
+    } else if (puntosJugador === 21) {
+        console.warn('21, Genial!');
+        btnPedir.disabled = true;
+    }
 
 });
