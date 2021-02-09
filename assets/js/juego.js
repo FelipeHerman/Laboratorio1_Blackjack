@@ -14,24 +14,35 @@
     //
 
     let deck         = [];
-    const tipos      = ['C', 'D', 'H', 'S'];
-    const otrosTipos = ['A', 'J', 'Q', 'K'];
+    const tipos      = ['C', 'D', 'H', 'S'],
+        otrosTipos = ['A', 'J', 'Q', 'K'];
 
-    let puntosJugador = 0, 
-        puntosComputadora = 0;
+    let puntosJugadores = [];
 
     //Referencias HTML
-    const btnPedir        = document.querySelector('#idPedir');
-    const btnDetener      = document.querySelector('#idDetener');
-    const btnNuevoJuego   = document.querySelector('#idNuevoJuego');
+    const btnPedir      = document.querySelector('#idPedir'),
+        btnDetener      = document.querySelector('#idDetener'),
+        btnNuevoJuego   = document.querySelector('#idNuevoJuego');
 
-    const divCartasJugador     = document.querySelector('#cartas__jugador');
-    const divCartasComputadora = document.querySelector('#cartas__computadora');
+    const divCartasJugador   = document.querySelector('#cartas__jugador'),
+        divCartasComputadora = document.querySelector('#cartas__computadora'),
+        puntosHTML = document.querySelectorAll('small');
 
-    const puntosHTML  = document.querySelectorAll('small');
+    // Función que inicializa el juego.
+    const inicializarJuego = ( numJugadores = 2) => {
+        deck = crearDeck();
 
-    // Está funcion crea una nueva baraja
-    const crearDeck = () => { //Funcion de flecha
+        for (let i = 0; i < numJugadores; i++) {
+            puntosJugadores.push(0);
+        }
+
+        console.log({puntosJugadores});
+    }
+
+    // Está funcion crea una nueva baraja y la retorna
+    const crearDeck = () => {
+        deck = [];
+
         for (let i = 2; i <= 10; i++) {
             for (const tipo of tipos) {
                 deck.push(i + tipo);    
@@ -44,12 +55,8 @@
             }
         }
 
-        deck = _.shuffle(deck);
-
-        return deck;
+        return _.shuffle(deck);
     }
-
-    crearDeck();
 
     //Esta funcion permite pedir una carta
     const pedirCarta = () => {
@@ -57,27 +64,26 @@
             throw 'No hay cartas en la baraja';
         }
 
-        const carta = deck.pop();
-
-        return carta;
+        return deck.pop();
     } 
-
-    //pedirCarta();
 
     // Valor de la carta
     const valorCarta = (carta) => {
         const valor = carta.substring(0, carta.length-1);
-
         return (isNaN(valor)) ? 
                 (valor === 'A') ? 11 : 10
                 : valor * 1;
+    }
+
+    //
+    const acumularPuntos = () => {
+
     }
 
     // Turno de la computadora
     const turnoComputadora = (puntosMinimos) => {
         
         do {
-
             const carta = pedirCarta();
 
             puntosComputadora = puntosComputadora + valorCarta(carta);
@@ -155,8 +161,10 @@
         btnPedir.disabled = false;
         btnDetener.disabled = false;
 
-        deck = [];
-        deck = crearDeck();
+        inicializarJuego();
+
+        /* deck = [];
+        deck = crearDeck(); */
 
         puntosJugador      = 0;
         puntosComputadora  = 0;
