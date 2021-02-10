@@ -35,8 +35,6 @@
         for (let i = 0; i < numJugadores; i++) {
             puntosJugadores.push(0);
         }
-
-        console.log({puntosJugadores});
     }
 
     // Está funcion crea una nueva baraja y la retorna
@@ -76,8 +74,9 @@
     }
 
     //
-    const acumularPuntos = () => {
-
+    const acumularPuntos = (turno) => {
+        puntosComputadora = puntosComputadora + valorCarta(carta);
+        puntosHTML[1].innerText = puntosComputadora;
     }
 
     // Turno de la computadora
@@ -86,8 +85,8 @@
         do {
             const carta = pedirCarta();
 
-            puntosComputadora = puntosComputadora + valorCarta(carta);
-            puntosHTML[1].innerText = puntosComputadora;
+            /* puntosComputadora = puntosComputadora + valorCarta(carta);
+            puntosHTML[1].innerText = puntosComputadora; */
 
             //<img class="cartas__img" src="assets/cartas/10S.png">
             const imgCarta = document.createElement('img');
