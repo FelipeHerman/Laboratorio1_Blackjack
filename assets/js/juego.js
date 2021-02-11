@@ -7,7 +7,7 @@
 
 //Patrón Modulo
 
-(() => { // función anónima auto invocada
+const miModulo = (() => { // función anónima auto invocada
 
     'use strict'
 
@@ -30,9 +30,17 @@
     // Función que inicializa el juego.
     const inicializarJuego = ( numJugadores = 2) => {
         deck = crearDeck();
+
+        puntosJugadores = [];
         for (let i = 0; i < numJugadores; i++) {
             puntosJugadores.push(0);
         }
+
+        puntosHTML.forEach(elem => elem.innerText = 0);
+        divCartasJugadores.forEach(elem => elem.innerText = '');
+
+        btnPedir.disabled = false;
+        btnDetener.disabled = false;
     }
 
     // Está funcion crea una nueva baraja y la retorna
@@ -80,12 +88,30 @@
         return puntosJugadores[turno];
     }
 
-    //
+    // Función crearCarta
     const crearCarta = (carta, turno) => {
         const imgCarta = document.createElement('img');
         imgCarta.src = `assets/cartas/${carta}.png`;
         imgCarta.classList.add('cartas__img');
         divCartasJugadores[turno].append(imgCarta);
+    }
+
+    // Función que determina a él ganador
+    const determinarGanador = () => {
+
+        const [puntosMinimos, puntosComputadora] = puntosJugadores;
+
+        setTimeout(() => {
+            if ( puntosComputadora === puntosMinimos ) {
+            alert('Nadie ha ganado');
+            } else if (puntosMinimos > 21) {
+                alert('Computadora ha ganado');
+            } else if (puntosComputadora > 21) {
+                alert('Jugador ha ganado');
+            } else{
+                alert('Computadora Gana');
+            }
+        }, 100);
     }
 
     // Turno de la computadora
@@ -97,33 +123,10 @@
             const carta = pedirCarta();
             puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
             crearCarta(carta, puntosJugadores.length - 1);
-
-            /* const imgCarta = document.createElement('img');
-            imgCarta.src = `assets/cartas/${carta}.png`;
-            imgCarta.classList.add('cartas__img');
-            divCartasComputadora.append(imgCarta); */
-
-            if (puntosMinimos > 21) {
-                break;
-            }
             
         } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
 
-        setTimeout(() => {
-            if ( puntosComputadora === puntosMinimos ) {
-            alert('Nadie ha ganado');
-            }
-            else if (puntosMinimos > 21) {
-                alert('Computadora ha ganado');
-            }
-            else if (puntosComputadora > 21) {
-                alert('Jugador ha ganado');
-            }
-            else{
-                alert('Computadora Gana');
-            }
-        }, 25);
-
+        determinarGanador();
     }
 
     // Eventos, Botón pedir
@@ -158,24 +161,11 @@
     });
 
     btnNuevoJuego.addEventListener('click', () => {
-        console.clear();
-
-        btnPedir.disabled = false;
-        btnDetener.disabled = false;
-
         inicializarJuego();
-
-        /* deck = [];
-        deck = crearDeck(); */
-
-        /* puntosJugador      = 0;
-        puntosComputadora  = 0; */
-
-        /*  puntosHTML[0].innerHTML = 0;
-        puntosHTML[1].innerHTML = 0;
-
-        divCartasJugador.innerHTML     = '';
-        divCartasComputadora.innerHTML = ''; */
     });
 
-})()
+    return {
+        nuevoJuego: inicializarJuego
+    };
+
+})();

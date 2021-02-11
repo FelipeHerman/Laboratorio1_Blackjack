@@ -23,8 +23,8 @@
         <div id="divBotones" class="btns__div col text-center">
 
             <button id="idNuevoJuego" class="btn btn-danger">Nuevo Juego</button>
-            <button id="idPedir" class="btn btn-primary">Pedir Carta</button>
-            <button id="idDetener" class="btn btn-primary">Detener</button>
+            <button id="idPedir" disabled="disable" class="btn btn-primary">Pedir Carta</button>
+            <button id="idDetener" disabled="disable" class="btn btn-primary">Detener</button>
 
         </div>
     </div>
@@ -49,6 +49,12 @@
 
     <script src="assets/js/underscore.js"></script>
     <script src="assets/js/juego.js"></script>
+
+    <script>
+        document.querySelector('#idNuevoJuego').addEventListener('click', () => {
+            miModulo.nuevoJuego();
+        })
+    </script>
 
 </body>
 </html>
