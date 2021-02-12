@@ -11,8 +11,6 @@ const miModulo = (() => { // función anónima auto invocada
 
     'use strict'
 
-    //
-
     let deck         = [];
     const tipos      = ['C', 'D', 'H', 'S'],
         otrosTipos = ['A', 'J', 'Q', 'K'];
@@ -157,7 +155,7 @@ const miModulo = (() => { // función anónima auto invocada
         btnPedir.disabled = true;
         btnDetener.disabled = true;
 
-        turnoComputadora(puntosJugador);
+        turnoComputadora(puntosJugadores[0]);
     });
 
     btnNuevoJuego.addEventListener('click', () => {
